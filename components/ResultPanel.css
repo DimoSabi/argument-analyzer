@@ -1,48 +1,263 @@
+/* ===== Result Panel Container ===== */
 .result-panel {
   display: flex;
   flex-direction: column;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background-color: #f9f9f9;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  margin: 10px;
+  gap: 16px;
+  padding: 8px 0;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
-.result-panel .claim-map {
-  margin-bottom: 15px;
+/* ===== Individual Cards ===== */
+.card {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 20px 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: box-shadow 0.2s ease;
 }
 
-.result-panel .escalation-level {
-  margin-bottom: 15px;
+.card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
 }
 
-.result-panel .debate-health-score {
-  margin-bottom: 15px;
+/* ===== Card Title ===== */
+.card-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0 0 14px 0;
+  color: #1a1a2e;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
 }
 
-.result-panel .argument-strength {
-  margin-bottom: 15px;
+/* ===== Card Note ===== */
+.card-note {
+  font-size: 0.78rem;
+  color: #888;
+  font-style: italic;
+  margin-top: 10px;
 }
 
-.result-panel .ragebait-probability {
-  margin-bottom: 15px;
+/* ===== Claim Map Card ===== */
+.claim-map .speaker-block {
+  margin-bottom: 14px;
 }
 
-.result-panel .logical-issues {
-  margin-bottom: 15px;
+.claim-map .speaker-block:last-child {
+  margin-bottom: 0;
 }
 
-.result-panel .suggested-responses {
-  margin-bottom: 15px;
+.speaker-name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #4a4a8a;
+  margin: 0 0 6px 0;
+  padding: 2px 8px;
+  background-color: #f0f0ff;
+  border-radius: 4px;
+  display: inline-block;
 }
 
-.result-panel h3 {
-  font-size: 1.5em;
+.claim-map ul {
+  margin: 6px 0 0 16px;
+  padding: 0;
+  list-style: disc;
+}
+
+.claim-map ul li {
+  font-size: 0.95rem;
+  color: #333;
+  margin-bottom: 4px;
+  line-height: 1.4;
+}
+
+/* ===== Argument Strength Card ===== */
+.argument-strength .strength-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
   margin-bottom: 10px;
 }
 
-.result-panel p {
-  font-size: 1em;
+.strength-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #4a4a8a;
+  min-width: 90px;
+}
+
+.strength-bar-bg {
+  flex: 1;
+  background-color: #e8e8f0;
+  border-radius: 8px;
+  height: 12px;
+  overflow: hidden;
+}
+
+.strength-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #667eea, #764ba2);
+  border-radius: 8px;
+  transition: width 0.4s ease;
+}
+
+.strength-score {
+  font-size: 0.85rem;
+  font-weight: 700;
   color: #333;
+  min-width: 48px;
+  text-align: right;
+}
+
+/* ===== Score Display (Ragebait, Health) ===== */
+.score-display {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  margin-bottom: 10px;
+}
+
+.score-number {
+  font-size: 2.8rem;
+  font-weight: 800;
+  line-height: 1;
+  color: #333;
+}
+
+.score-unit {
+  font-size: 1.1rem;
+  color: #888;
+  font-weight: 500;
+}
+
+/* Health score colours */
+.health-low { color: #e53e3e; }
+.health-mid { color: #dd6b20; }
+.health-high { color: #38a169; }
+
+.health-interpretation {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #555;
+  margin: 0 0 12px 0;
+}
+
+.health-factors ul {
+  margin: 6px 0 0 16px;
+  padding: 0;
+  list-style: disc;
+}
+
+.health-factors ul li {
+  font-size: 0.9rem;
+  color: #444;
+  margin-bottom: 4px;
+  line-height: 1.4;
+}
+
+/* ===== Escalation Badge ===== */
+.escalation-badge {
+  display: inline-block;
+  padding: 4px 16px;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.06em;
+  margin-bottom: 12px;
+}
+
+.escalation-low {
+  background-color: #c6f6d5;
+  color: #22543d;
+}
+
+.escalation-moderate {
+  background-color: #fefcbf;
+  color: #744210;
+}
+
+.escalation-high {
+  background-color: #fed7d7;
+  color: #742a2a;
+}
+
+.escalation-level ul,
+.ragebait-probability ul {
+  margin: 6px 0 0 16px;
+  padding: 0;
+  list-style: disc;
+}
+
+.escalation-level ul li,
+.ragebait-probability ul li {
+  font-size: 0.9rem;
+  color: #444;
+  margin-bottom: 4px;
+}
+
+.escalation-level h4,
+.ragebait-probability h4,
+.health-factors h4 {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #666;
+  margin: 10px 0 4px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* ===== Logical Issues / Bad Faith / Persuasion Tactics ===== */
+.logical-issues ul,
+.bad-faith ul,
+.persuasion-tactics ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.logical-issues ul li,
+.bad-faith ul li,
+.persuasion-tactics ul li {
+  font-size: 0.9rem;
+  color: #333;
+  padding: 6px 0;
+  border-bottom: 1px solid #f0f0f0;
+  line-height: 1.5;
+}
+
+.logical-issues ul li:last-child,
+.bad-faith ul li:last-child,
+.persuasion-tactics ul li:last-child {
+  border-bottom: none;
+}
+
+.tag {
+  display: inline-block;
+  background-color: #edf2ff;
+  color: #4a4a8a;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 10px;
+  margin-right: 4px;
+}
+
+/* ===== Suggested Responses Card ===== */
+.suggested-responses ol {
+  margin: 0 0 0 18px;
+  padding: 0;
+}
+
+.suggested-responses ol li {
+  font-size: 0.95rem;
+  color: #333;
+  margin-bottom: 10px;
+  line-height: 1.5;
+  padding: 8px 12px;
+  background-color: #f7f7ff;
+  border-left: 3px solid #667eea;
+  border-radius: 0 6px 6px 0;
+  list-style-position: outside;
 }
