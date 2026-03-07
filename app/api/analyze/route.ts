@@ -1,30 +1,21 @@
-import { NextResponse } from 'next/server';
-import OpenAI from 'openai'; // assuming an OpenAI library is being used
+// Improved AI prompt implementation
 
-const openai = new OpenAI(/* Your OpenAI API context */);
+import { extractClaims } from './claimExtractor';
+import { detectEscalationLevel } from './escalationDetector';
+import { calculateDebateHealthScore } from './debateHealthCalculator';
 
-export async function POST(request: Request) {
-    try {
-        const { conversation } = await request.json();
+export async function analyzeDebateContent(content) {
+    // Step 1: Extract claims from the provided content
+    const claims = extractClaims(content);
 
-        // Call OpenAI API for analysis
-        const response = await openai.chat.completions.create({
-            model: "gpt-3.5-turbo", // Adjust model as necessary
-            messages: [{ role: "user", content: conversation }],
-        });
+    // Step 2: Detect escalation level based on claims
+    const escalationLevel = detectEscalationLevel(claims);
 
-        // Process the OpenAI response and structure it
-        const analysis = { 
-            claims: [], // populate this from the response
-            fallacies: [], // populate this from the response
-            tactics: [], // populate this from the response
-            argumentStrength: 0, // populate based on the response
-            suggestedResponses: [] // populate this from the response
-        };
+    // Step 3: Calculate debate health score
+    const debateHealthScore = calculateDebateHealthScore(claims);
 
-        return NextResponse.json(analysis);
-    } catch (error) {
-        console.error("Error analyzing conversation:", error);
-        return NextResponse.json({ error: 'Failed to analyze conversation.' }, { status: 500 });
-    }
+    // Step 4: Prepare AI prompt
+    const improvedPrompt = `Analyzing the following claims: ${JSON.stringify(claims)}\nEscalation Level: ${escalationLevel}\nDebate Health Score: ${debateHealthScore}`;
+
+    return improvedPrompt;
 }
