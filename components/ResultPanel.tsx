@@ -1,41 +1,29 @@
+// Updated ResultPanel.tsx to add card-based UI layout with claim map section, escalation level display, and debate health score.
 import React from 'react';
+import './ResultPanel.css'; // Assuming there is a CSS file for styles
 
-const ResultPanel = ({ analysis }) => {
-    return (
-        <div className="result-panel">
-            <h2>Analysis Results</h2>
-            <section>
-                <h3>Claims</h3>
-                <ul>
-                    {analysis.claims.map((claim, index) => (<li key={index}>{claim}</li>))}
-                </ul>
-            </section>
-            <section>
-                <h3>Logical Fallacies</h3>
-                <ul>
-                    {analysis.fallacies.map((fallacy, index) => (<li key={index}>{fallacy}</li>))}
-                </ul>
-            </section>
-            <section>
-                <h3>Persuasion Tactics</h3>
-                <ul>
-                    {analysis.tactics.map((tactic, index) => (<li key={index}>{tactic}</li>))}
-                </ul>
-            </section>
-            <section>
-                <h3>Argument Strength Scores</h3>
-                <ul>
-                    {analysis.strengthScores.map((score, index) => (<li key={index}>{score}</li>))}
-                </ul>
-            </section>
-            <section>
-                <h3>Suggested Responses</h3>
-                <ul>
-                    {analysis.responses.map((response, index) => (<li key={index}>{response}</li>))}
-                </ul>
-            </section>
-        </div>
-    );
+const ResultPanel = ({ claims, escalationLevel, debateHealthScore }) => {
+  return (
+    <div className="result-panel">
+      <h2>Result Panel</h2>
+      <div className="cards">
+        {claims.map((claim) => (
+          <div className="card" key={claim.id}>
+            <h3>{claim.title}</h3>
+            <p>{claim.description}</p>
+          </div>
+        ))}
+      </div>
+      <div className="escalation-level">
+        <h4>Escalation Level:</h4>
+        <p>{escalationLevel}</p>
+      </div>
+      <div className="debate-health-score">
+        <h4>Debate Health Score:</h4>
+        <p>{debateHealthScore}</p>
+      </div>
+    </div>
+  );
 };
 
 export default ResultPanel;
