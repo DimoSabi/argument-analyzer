@@ -46,3 +46,103 @@
   font-size: 1em;
   color: #333;
 }
+
+.result-panel .confidence-section {
+  margin-bottom: 15px;
+  padding: 10px;
+  background-color: #e8f4fd;
+  border-radius: 6px;
+}
+
+.result-panel .confidence-reasoning {
+  font-size: 0.9em;
+  color: #555;
+  font-style: italic;
+}
+
+.result-panel .debate-type-section {
+  margin-bottom: 15px;
+  padding: 10px;
+  background-color: #f0f0f0;
+  border-radius: 6px;
+}
+
+.result-panel .logical-issue-item {
+  margin-bottom: 12px;
+  padding: 10px;
+  background-color: #fff8e1;
+  border-left: 4px solid #ffa000;
+  border-radius: 4px;
+}
+
+.result-panel .logical-issue-item .definition {
+  font-size: 0.85em;
+  color: #666;
+  font-style: italic;
+  margin: 4px 0;
+}
+
+.result-panel .logical-issue-item .explanation {
+  font-size: 0.95em;
+  color: #333;
+}
+
+.result-panel .tactic-item {
+  margin-bottom: 10px;
+  padding: 8px;
+  background-color: #fce4ec;
+  border-radius: 4px;
+}
+
+.result-panel .severity {
+  font-size: 0.85em;
+  text-transform: capitalize;
+}
+
+.result-panel .severity-high {
+  color: #c62828;
+}
+
+.result-panel .severity-moderate {
+  color: #e65100;
+}
+
+.result-panel .severity-low {
+  color: #558b2f;
+}
+
+.result-panel .metrics-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.result-panel .metrics-row > div {
+  flex: 1;
+  min-width: 120px;
+  padding: 10px;
+  background-color: #f0f0f0;
+  border-radius: 6px;
+  text-align: center;
+}
+
+.result-panel .strategy-used {
+  font-size: 0.85em;
+  color: #666;
+  font-style: italic;
+}
+
+.result-panel .speaker-claims {
+  margin-bottom: 10px;
+  padding: 8px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.result-panel .persuasion-tactics,
+.result-panel .bad-faith-indicators,
+.result-panel .debate-tactics {
+  margin-bottom: 15px;
+}
