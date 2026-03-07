@@ -1,42 +1,66 @@
+'use client';
+
 import { useState } from 'react';
-import Head from 'next/head';
+import AnalyzerForm from '../components/AnalyzerForm';
+import ResultPanel from '../components/ResultPanel';
 
-const Home = () => {
-  const [results, setResults] = useState(null);
+interface AnalysisResult {
+  claim_map?: Record<string, string[]>;
+  logical_issues?: { speaker: string; issue: string; description: string }[];
+  persuasion_tactics?: string[];
+  debate_tactics_detected?: { tactic: string; speaker: string; description: string; severity: string }[];
+  bad_faith_indicators?: string[];
+  ragebait_probability?: number;
+  escalation_level?: string;
+  debate_health_score?: number;
+  analysis_confidence?: number;
+  confidence_reasoning?: string;
+  debate_type?: string;
+  suggested_response?: string;
+  strategy_used?: string;
+}
+
+export default function Home() {
+  const [result, setResult] = useState<AnalysisResult | null>(null);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
 
-  const fetchResults = async () => {
+  const handleAnalyze = async (conversation: string) => {
     setLoading(true);
     setError(null);
+    setResult(null);
 
     try {
-      // Example API call
-      const response = await fetch('/api/results');
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
+      const response = await fetch('/api/analyze', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ conversation }),
+      });
+
       const data = await response.json();
-      setResults(data);
+
+      if (!response.ok) {
+        setError(data.error || 'An error occurred during analysis');
+      } else {
+        setResult(data);
+      }
     } catch (err) {
-      setError(err.message);
+      setError(err instanceof Error ? err.message : 'An unexpected error occurred');
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div>
-      <Head>
-        <title>Argument Analyzer</title>
-      </Head>
-      <h1>Welcome to Argument Analyzer</h1>
-      <button onClick={fetchResults}>Fetch Results</button>
-      {loading && <p>Loading...</p>}
-      {error && <p>Error: {error}</p>}
-      {results && <pre>{JSON.stringify(results, null, 2)}</pre>}
+    <div style={{ maxWidth: '800px', margin: '0 auto', padding: '20px' }}>
+      <h1>Argument Analyzer</h1>
+      <AnalyzerForm onAnalyze={handleAnalyze} loading={loading} />
+      {error && (
+        <div style={{ color: 'red', margin: '10px 0', padding: '10px', border: '1px solid red', borderRadius: '4px' }}>
+          {error}
+        </div>
+      )}
+      {result && <ResultPanel result={result} />}
     </div>
   );
-};
-
-export default Home;
+}

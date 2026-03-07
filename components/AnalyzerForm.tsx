@@ -1,12 +1,18 @@
 import React, { useState } from 'react';
 
-const AnalyzerForm = () => {
+interface AnalyzerFormProps {
+  onAnalyze: (conversation: string) => void;
+  loading: boolean;
+}
+
+const AnalyzerForm: React.FC<AnalyzerFormProps> = ({ onAnalyze, loading }) => {
     const [conversationText, setConversationText] = useState('');
 
-    const handleSubmit = (event) => {
+    const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
-        // Trigger analysis logic here
-        console.log('Analyzing conversation:', conversationText);
+        if (conversationText.trim()) {
+            onAnalyze(conversationText);
+        }
     };
 
     return (
@@ -17,8 +23,11 @@ const AnalyzerForm = () => {
                 placeholder="Enter conversation text..."
                 rows={10}
                 style={{ width: '100%' }}
+                disabled={loading}
             />
-            <button type="submit">Analyze</button>
+            <button type="submit" disabled={loading || !conversationText.trim()}>
+                {loading ? 'Analyzing...' : 'Analyze'}
+            </button>
         </form>
     );
 };
