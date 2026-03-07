@@ -1,0 +1,48 @@
+.result-panel {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin: 10px;
+}
+
+.result-panel .claim-map {
+  margin-bottom: 15px;
+}
+
+.result-panel .escalation-level {
+  margin-bottom: 15px;
+}
+
+.result-panel .debate-health-score {
+  margin-bottom: 15px;
+}
+
+.result-panel .argument-strength {
+  margin-bottom: 15px;
+}
+
+.result-panel .ragebait-probability {
+  margin-bottom: 15px;
+}
+
+.result-panel .logical-issues {
+  margin-bottom: 15px;
+}
+
+.result-panel .suggested-responses {
+  margin-bottom: 15px;
+}
+
+.result-panel h3 {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+.result-panel p {
+  font-size: 1em;
+  color: #333;
+}
