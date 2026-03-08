@@ -2,7 +2,9 @@
 import React from 'react';
 import './ResultPanel.css'; // Assuming there is a CSS file for styles
 
-const ResultPanel = ({ claims, escalationLevel, debateHealthScore }) => {
+type Claim = { id: string | number; title: string; description: string };
+
+const ResultPanel = ({ claims, escalationLevel, debateHealthScore }: { claims: Claim[]; escalationLevel: string; debateHealthScore: number }) => {
   return (
     <div className="result-panel">
       <h2>Result Panel</h2>

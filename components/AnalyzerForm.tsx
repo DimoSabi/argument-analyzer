@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 const AnalyzerForm = () => {
     const [conversationText, setConversationText] = useState('');
 
-    const handleSubmit = (event) => {
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         // Trigger analysis logic here
         console.log('Analyzing conversation:', conversationText);
