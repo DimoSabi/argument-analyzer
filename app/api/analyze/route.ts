@@ -1,21 +1,17 @@
 import { NextResponse } from 'next/server';
-import { OpenAI } from 'openai';
+import { OpenAIClient } from 'your-openai-sdk'; // Adjust import path accordingly
 
-export async function POST(req) {
-    const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+export async function POST(request: Request) {
+    const openAIClient = new OpenAIClient(); // Moved initialization here
 
-    const { messages } = await req.json();
+    const { conversation } = await request.json();
 
-    try {
-        const completion = await openai.chat.completions.create({
-            messages,
-            model: 'gpt-3.5-turbo',
-            temperature: 0.7,
-        });
+    // Your existing logic for analyzing conversations and strategies
+    const results = await analyzeConversations(conversation, openAIClient);
 
-        const responseMessage = completion.choices[0].message;
-        return NextResponse.json({ data: responseMessage });
-    } catch (error) {
-        return NextResponse.json({ error: 'Error processing request' }, { status: 500 });
-    }
+    return NextResponse.json(results);
+}
+
+async function analyzeConversations(conversation, client) {
+    // Your existing logic
 }
